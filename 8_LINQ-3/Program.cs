@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace LINQ3
 {
@@ -46,10 +47,7 @@ namespace LINQ3
                 {
                     var filteredPatientsByFullName = _ills.OrderBy(patient => patient.FullName);
 
-                    foreach (var patient in filteredPatientsByFullName)
-                    {
-                        Console.WriteLine($"ФИО - {patient.FullName}, Возраст - {patient.Age}, Заболевание - {patient.Disease} ");
-                    }
+                    ShowFilteredPatients(filteredPatientsByFullName);
 
                     DescribeResult("\nДля продолжения нажмите любую клавишу...");
                 }
@@ -57,10 +55,7 @@ namespace LINQ3
                 {
                     var filteredPatientsByAge = _ills.OrderBy(patient => patient.Age);
 
-                    foreach (var patient in filteredPatientsByAge)
-                    {
-                        Console.WriteLine($"ФИО - {patient.FullName}, Возраст - {patient.Age}, Заболевание - {patient.Disease} ");
-                    }
+                    ShowFilteredPatients(filteredPatientsByAge);
 
                     DescribeResult("\nДля продолжения нажмите любую клавишу...");
                 }
@@ -86,6 +81,14 @@ namespace LINQ3
                 {
                     Console.WriteLine("Ошибка. Попробуйте ещё раз.");
                 }
+            }
+        }
+
+        private void ShowFilteredPatients(IOrderedEnumerable<Ill> filteredPatients)
+        {
+            foreach (var patient in filteredPatients)
+            {
+                Console.WriteLine($"ФИО - {patient.FullName}, Возраст - {patient.Age}, Заболевание - {patient.Disease} ");
             }
         }
 
