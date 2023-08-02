@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,9 +51,7 @@ namespace LINQ3
                         Console.WriteLine($"ФИО - {patient.FullName}, Возраст - {patient.Age}, Заболевание - {patient.Disease} ");
                     }
 
-                    Console.Write("\nДля продолжения нажмите любую клавишу...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    DescribeResult("\nДля продолжения нажмите любую клавишу...");
                 }
                 else if (userInput == commandSortPatientsByAge)
                 {
