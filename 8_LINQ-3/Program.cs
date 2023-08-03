@@ -44,19 +44,11 @@ namespace LINQ3
 
                 if (userInput == commandSortPatientsByFullName)
                 {
-                    var filteredPatientsByFullName = _ills.OrderBy(patient => patient.FullName);
-
-                    ShowFilteredPatients(filteredPatientsByFullName);
-
-                    DescribeResult("\nДля продолжения нажмите любую клавишу...");
+                    ShowFilteredPatients(_ills.OrderBy(patient => patient.FullName));
                 }
                 else if (userInput == commandSortPatientsByAge)
                 {
-                    var filteredPatientsByAge = _ills.OrderBy(patient => patient.Age);
-
-                    ShowFilteredPatients(filteredPatientsByAge);
-
-                    DescribeResult("\nДля продолжения нажмите любую клавишу...");
+                    ShowFilteredPatients(_ills.OrderBy(patient => patient.Age));
                 }
                 else if (userInput == commandSortPatientsByDisease)
                 {
@@ -65,12 +57,7 @@ namespace LINQ3
 
                     var filteredPatientsByDisease = _ills.Where(patient => patient.Disease.ToLower() == userInput.ToLower());
 
-                    foreach (var patient in filteredPatientsByDisease)
-                    {
-                        Console.WriteLine($"ФИО - {patient.FullName}, Возраст - {patient.Age}, Заболевание - {patient.Disease}");
-                    }
-
-                    DescribeResult("\nДля продолжения нажмите любую клавишу...");
+                    ShowFilteredPatients(filteredPatientsByDisease);
                 }
                 else if (userInput == commandExit)
                 {
@@ -80,22 +67,19 @@ namespace LINQ3
                 {
                     Console.WriteLine("Ошибка. Попробуйте ещё раз.");
                 }
+
+                Console.WriteLine("\nДля продолжения нажмите любую клавишу...");
+                Console.ReadLine();
+                Console.Clear();
             }
         }
 
-        private void ShowFilteredPatients(IOrderedEnumerable<Ill> filteredPatients)
+        private void ShowFilteredPatients(IEnumerable<Ill> filteredPatients)
         {
             foreach (var patient in filteredPatients)
             {
                 Console.WriteLine($"ФИО - {patient.FullName}, Возраст - {patient.Age}, Заболевание - {patient.Disease} ");
             }
-        }
-
-        private void DescribeResult(string initialDescription)
-        {
-            Console.WriteLine(initialDescription);
-            Console.ReadLine();
-            Console.Clear();
         }
 
         private void CreateIlls()
